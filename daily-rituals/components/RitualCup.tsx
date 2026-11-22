@@ -58,6 +58,18 @@ function Buds({ active }: { active: boolean }) {
 }
 
 function Mug({ active }: { active: boolean }) {
+  // speckled stoneware, like the cups and bowls on the café shelves
+  const speckle = useMemo(() => {
+    const c = document.createElement("canvas"); c.width = c.height = 512;
+    const g = c.getContext("2d")!;
+    g.fillStyle = "#efe8dc"; g.fillRect(0, 0, 512, 512);
+    for (let i = 0; i < 900; i++) {
+      g.fillStyle = `rgba(${60 + Math.random() * 40},${45 + Math.random() * 30},${35},${0.35 + Math.random() * 0.5})`;
+      g.beginPath(); g.arc(Math.random() * 512, Math.random() * 512, 0.6 + Math.random() * 1.8, 0, Math.PI * 2); g.fill();
+    }
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(3, 1);
+    return t;
+  }, []);
   const group = useRef<THREE.Group>(null);
   const stir = useRef(0);
   const uniforms = useMemo(() => ({ uTime: { value: 0 }, uStir: { value: 0 } }), []);
@@ -83,7 +95,7 @@ function Mug({ active }: { active: boolean }) {
   return (
     <group ref={group} onPointerMove={() => { stir.current = Math.min(1.2, stir.current + 0.05); }}>
       <mesh geometry={body} castShadow>
-        <meshStandardMaterial color="#f3ece2" roughness={0.35} side={THREE.DoubleSide} />
+        <meshStandardMaterial map={speckle} roughness={0.6} side={THREE.DoubleSide} />
       </mesh>
       <mesh position={[0, 1.24, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <circleGeometry args={[1.02, 64]} />
@@ -91,11 +103,11 @@ function Mug({ active }: { active: boolean }) {
       </mesh>
       <mesh position={[1.12, 0.72, 0]} rotation={[0, 0, 0]}>
         <torusGeometry args={[0.32, 0.07, 16, 40, Math.PI * 1.2]} />
-        <meshStandardMaterial color="#f3ece2" roughness={0.35} />
+        <meshStandardMaterial map={speckle} roughness={0.6} />
       </mesh>
       <mesh position={[0, -0.02, 0]}>
         <cylinderGeometry args={[1.65, 1.5, 0.08, 64]} />
-        <meshStandardMaterial color="#a7b59a" roughness={0.5} />
+        <meshStandardMaterial color="#8a5a36" roughness={0.75} />
       </mesh>
     </group>
   );

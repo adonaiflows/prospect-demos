@@ -2,8 +2,11 @@ import Image from "next/image";
 import Cup3D from "@/components/Cup3D";
 import Depth from "@/components/Depth";
 import Reveal from "@/components/Reveal";
+import Star from "@/components/Star";
+import Lamp from "@/components/Lamp";
 
-// Facts below come from Daily Rituals' Google Maps listing and reviews (checked Nov 22, 2026). Anything not verified is marked TODO.
+// Facts: Google Maps listing (checked Nov 22, 2026) and Adonai (sister shop House of Stickks & Stones shares a wall and an open doorway).
+// Photos: supplied by Adonai from the café's public listings. TODO: get the owners' OK or swap in their own photos before launch.
 const PHONE = "(504) 377-1751";
 const TEL = "tel:+15043771751";
 const ADDRESS = "3409 Central Ave NE, Albuquerque, NM 87106";
@@ -14,11 +17,13 @@ const hours = [
   ["Friday – Saturday", "8 am – 5 pm"],
 ];
 
-const rituals = [
-  { img: "/images/circle.webp", alt: "Friends sharing a table of lattes", n: "I", title: "Gather", body: "A calm room on Central to meet a friend, read, or just sit for a minute." },
-  { img: "/images/latte3.webp", alt: "Latte being finished at the espresso machine", n: "II", title: "Sip", body: "Coffee drinks made to order, including lattes with our house lavender syrup." },
-  { img: "/images/mugs.webp", alt: "A ring of coffee cups on a wooden table", n: "III", title: "Take a little home", body: "Browse the gift shop on your way out. TODO: name the makers and products you carry." },
-];
+function Wordmark({ className = "" }: { className?: string }) {
+  return (
+    <span className={`inline-flex items-center gap-[.5em] caps ${className}`}>
+      Daily <Star className="h-[1.3em] w-[1.3em]" /> Rituals
+    </span>
+  );
+}
 
 export default function Home() {
   return (
@@ -27,170 +32,184 @@ export default function Home() {
       <Reveal />
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">Skip to content</a>
 
-      <header className="sticky top-0 z-30 border-b border-[var(--line)] bg-bg/80 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b border-[var(--line)] bg-plaster/85 backdrop-blur-md">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8" aria-label="Main">
-          <a href="#" className="display text-2xl italic md:text-3xl">Daily Rituals</a>
-          <div className="hidden items-center gap-8 text-sm md:flex">
-            <a href="#rituals" className="hover:text-lav">The café</a>
-            <a href="#lavender" className="hover:text-lav">Lavender latte</a>
-            <a href="#shop" className="hover:text-lav">Gift shop</a>
-            <a href="#visit" className="hover:text-lav">Visit</a>
+          <a href="#" aria-label="Daily Rituals home"><Wordmark className="text-sm md:text-base" /></a>
+          <div className="hidden items-center gap-8 text-xs uppercase tracking-[.2em] md:flex">
+            <a href="#space" className="hover:text-wood">The space</a>
+            <a href="#lavender" className="hover:text-wood">Lavender latte</a>
+            <a href="#shop" className="hover:text-wood">Gift shop</a>
+            <a href="#visit" className="hover:text-wood">Visit</a>
           </div>
-          <a href={MAPS} target="_blank" rel="noopener noreferrer" className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper">Directions</a>
+          <a href={MAPS} target="_blank" rel="noopener noreferrer" className="bg-ink px-4 py-2 text-xs uppercase tracking-[.2em] text-paper">Directions</a>
         </nav>
       </header>
 
       <main id="main">
-        {/* HERO */}
-        <section className="relative isolate overflow-hidden">
-          <div className="blob absolute -left-24 top-10 -z-10 h-80 w-80 rounded-full bg-lav-soft" aria-hidden />
-          <div className="blob absolute -right-10 bottom-0 -z-10 h-96 w-96 rounded-full bg-sage-soft [animation-delay:-6s]" aria-hidden />
-          <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 pt-12 md:grid-cols-[1.05fr_1fr] md:px-8 md:pb-24 md:pt-20">
+        {/* HERO: limewash wall, hanging rattan lamps, 3D stoneware cup */}
+        <section className="limewash relative isolate overflow-hidden">
+          <Lamp className="sway pointer-events-none absolute -top-2 left-[6%] hidden w-20 md:block" />
+          <Lamp className="sway pointer-events-none absolute -top-10 right-[4%] w-16 [animation-delay:-3s] md:w-24" />
+          <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 pt-12 md:grid-cols-[1.05fr_1fr] md:px-8 md:pb-24 md:pt-16">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[.3em] text-sage">Holistic café · Nob Hill</p>
-              <h1 className="display mt-5 text-[3.6rem] md:text-[6.2rem]">
-                Make room for a <em className="text-lav">slower</em> morning.
+              <p className="caps text-[11px] text-olive">Coffee · Gift shop · Nob Hill</p>
+              <h1 className="display mt-5 text-[3.2rem] md:text-[5.4rem]">
+                A daily ritual, <span className="accent text-wood">poured slow.</span>
               </h1>
               <p className="mt-6 max-w-md text-lg text-muted">
-                Coffee, house lavender lattes and a little gift shop on Central Ave. Women-owned, Latino-owned, and kid-friendly.
+                Coffee, house lavender lattes, a gift shop and a kids area on Central Ave. Women-owned and Latino-owned, with our sister shop House of Stickks &amp; Stones right through the doorway.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="#visit" className="btn btn-ink">Plan your visit</a>
-                <a href="#lavender" className="btn btn-soft">The lavender latte</a>
+                <a href="#lavender" className="btn btn-line">The lavender latte</a>
               </div>
               <p className="mt-8 flex items-center gap-3 text-sm text-muted">
-                <span className="text-lg tracking-widest text-lav" aria-hidden>★★★★★</span>
-                4.9 on Google · TODO: update review count before launch
+                <span className="tracking-[.3em] text-wood" aria-hidden>★★★★★</span>
+                4.9 on Google
               </p>
             </div>
 
-            <div className="relative mx-auto h-[440px] w-full max-w-[420px] md:h-[560px]">
-              <div className="arch absolute inset-x-6 bottom-0 top-8 overflow-hidden" data-depth="0.08">
-                <Image src="/images/hero.webp" alt="" fill priority sizes="(min-width: 768px) 420px, 90vw" className="object-cover opacity-40" />
-                <div className="absolute inset-0 bg-gradient-to-t from-lav-soft via-lav-soft/50 to-transparent" />
+            <div className="relative mx-auto h-[430px] w-full max-w-[420px] md:h-[540px]">
+              <div className="arch absolute inset-x-4 bottom-0 top-6 overflow-hidden bg-sand shadow-[inset_0_30px_60px_rgba(138,90,54,.25)]" data-depth="0.06">
+                <Star className="spin absolute left-1/2 top-10 h-40 w-40 -translate-x-1/2 text-paper/70" />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-wood/40 to-transparent" />
               </div>
               <div className="absolute inset-0 cursor-grab"><Cup3D /></div>
-              <p className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-paper/80 px-3 py-1 text-xs text-muted backdrop-blur">Drag to turn · hover to stir</p>
+              <p className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-paper/85 px-3 py-1 text-[11px] uppercase tracking-[.18em] text-muted backdrop-blur">Drag to turn · hover to stir</p>
             </div>
           </div>
         </section>
 
         {/* VALUES */}
-        <section className="border-y border-[var(--line)] bg-paper">
-          <ul className="mx-auto grid max-w-6xl grid-cols-2 divide-[var(--line)] px-5 text-center md:grid-cols-4 md:divide-x md:px-8">
-            {[["Women-owned", "per Google"], ["Latino-owned", "per Google"], ["Gift shop", "on site"], ["Kids corner", "bring the little ones"]].map(([a, b]) => (
-              <li key={a} className="py-6"><p className="display text-2xl italic md:text-3xl">{a}</p><p className="mt-1 text-xs uppercase tracking-widest text-muted">{b}</p></li>
+        <section className="border-y border-[var(--line)] bg-ink text-paper">
+          <ul className="mx-auto grid max-w-6xl grid-cols-2 px-5 text-center md:grid-cols-4 md:px-8">
+            {["Women-owned", "Latino-owned", "Gift shop", "Kids area"].map((a) => (
+              <li key={a} className="flex items-center justify-center gap-3 py-5 text-[11px] uppercase tracking-[.28em]"><Star className="h-3 w-3 text-sand" />{a}</li>
             ))}
           </ul>
         </section>
 
-        {/* RITUALS */}
-        <section id="rituals" className="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
-          <div className="reveal max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[.3em] text-sage">The café</p>
-            <h2 className="display mt-4 text-5xl md:text-7xl">Three small rituals, <em>one stop.</em></h2>
+        {/* THE SPACE: layered real photos */}
+        <section id="space" className="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
+          <div className="grid items-end gap-6 md:grid-cols-2">
+            <div className="reveal">
+              <p className="caps text-[11px] text-olive">The space</p>
+              <h2 className="display mt-4 text-5xl md:text-7xl">Rattan light, raw wood, <span className="accent text-wood">room to stay.</span></h2>
+            </div>
+            <p className="reveal text-muted md:pb-3">Long wood tables, soft chairs and plants in the window. Come for a cup and stay for the afternoon.</p>
           </div>
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {rituals.map((r, i) => (
-              <article key={r.title} className={`reveal tilt relative ${i === 1 ? "md:mt-16" : ""}`}>
-                <div className="arch relative aspect-[3/4] overflow-hidden shadow-[0_30px_60px_-30px_rgba(46,42,37,.45)]">
-                  <Image src={r.img} alt={r.alt} fill sizes="(min-width: 768px) 30vw, 100vw" className="object-cover" />
-                </div>
-                <div className="pop -mt-10 ml-6 mr-6 rounded-2xl bg-paper p-6 shadow-lg">
-                  <p className="display text-xl italic text-lav">{r.n}</p>
-                  <h3 className="display text-3xl">{r.title}</h3>
-                  <p className="mt-2 text-sm text-muted">{r.body}</p>
-                </div>
-              </article>
-            ))}
+
+          <div className="relative mt-14 grid gap-6 md:h-[640px] md:grid-cols-12 md:gap-0">
+            <figure className="reveal tilt relative overflow-hidden md:col-span-7 md:col-start-1 md:row-start-1 md:h-[560px]">
+              <Image src="/images/r-counter.webp" alt="The Daily Rituals counter under rattan pendant lights" width={736} height={884} sizes="(min-width: 768px) 58vw, 100vw" className="h-full w-full object-cover" />
+            </figure>
+            <figure className="reveal relative z-10 overflow-hidden border-[10px] border-plaster shadow-[0_40px_60px_-30px_rgba(29,27,24,.6)] md:col-span-5 md:col-start-7 md:row-start-1 md:mt-24 md:h-[440px]" data-depth="-0.08">
+              <Image src="/images/r-lounge.webp" alt="Lounge chair and menu board inside the café" width={754} height={922} sizes="(min-width: 768px) 40vw, 100vw" className="h-full w-full object-cover" />
+            </figure>
+            <figure className="reveal relative z-20 hidden w-56 overflow-hidden border-[8px] border-plaster shadow-xl md:absolute md:-bottom-10 md:right-0 md:block" data-depth="-0.18">
+              <Image src="/images/r-table.webp" alt="Live-edge wood table with log benches" width={750} height={906} sizes="224px" className="w-full" />
+            </figure>
           </div>
         </section>
 
-        {/* LAVENDER feature with layered depth */}
-        <section id="lavender" className="relative isolate overflow-hidden bg-[#2f2a36] py-24 text-paper md:py-32">
-          <div className="absolute inset-x-0 -bottom-[20%] -top-[20%] -z-10 opacity-35" data-depth="0.2">
-            <Image src="/images/swirl.webp" alt="" fill sizes="100vw" className="object-cover" />
-          </div>
-          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#2f2a36] via-[#2f2a36]/85 to-[#2f2a36]/40" />
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-2 md:px-8">
-            <div>
-              <p className="reveal text-xs font-semibold uppercase tracking-[.3em] text-lav-soft">House favorite</p>
-              <h2 className="reveal display mt-4 text-5xl md:text-7xl">The <em className="text-[#c9b6ea]">lavender</em> latte.</h2>
-              <p className="reveal mt-6 max-w-md text-lg text-paper/80">
-                Espresso, steamed milk and our house lavender syrup. Floral, soft and made in house.
-              </p>
-              <p className="reveal mt-4 text-xs text-paper/60">TODO: add price, milk options and whether it comes iced.</p>
+        {/* LAVENDER LATTE (Adonai's photo) */}
+        <section id="lavender" className="relative isolate overflow-hidden bg-ink text-paper">
+          <div className="grid md:grid-cols-2">
+            <div className="relative min-h-[360px] overflow-hidden md:min-h-[640px]">
+              <div className="absolute inset-x-0 -bottom-[12%] -top-[12%]" data-depth="0.12">
+                <Image src="/images/r-lavender.webp" alt="Lavender latte with leaf art and dried lavender on a wooden table" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+              </div>
             </div>
-            <div className="relative mx-auto w-full max-w-[460px]">
-              <div className="absolute inset-8 rounded-full bg-lav/40 blur-3xl" aria-hidden />
-              <div data-depth="-0.12">
-                <Image src="/images/cup.webp" alt="A latte with leaf art seen from above" width={900} height={873} sizes="(min-width: 768px) 460px, 90vw" className="float relative drop-shadow-[0_40px_50px_rgba(0,0,0,.5)]" />
+            <div className="flex items-center px-6 py-20 md:px-16">
+              <div>
+                <p className="reveal caps text-[11px] text-lav">House favorite</p>
+                <h2 className="reveal display mt-4 text-5xl md:text-7xl">The <span className="accent text-lav">lavender</span> latte.</h2>
+                <p className="reveal mt-6 max-w-md text-lg text-paper/80">Espresso, steamed milk and our house lavender syrup.</p>
+                <p className="reveal mt-4 text-xs text-paper/55">TODO: price, milk options and whether it comes iced.</p>
+                <div className="reveal mt-10 grid grid-cols-2 gap-4">
+                  <figure className="tilt relative overflow-hidden">
+                    <Image src="/images/r-lattes.webp" alt="Two lattes with leaf art in black stoneware cups" width={734} height={619} sizes="(min-width: 768px) 20vw, 45vw" className="w-full" />
+                    <figcaption className="mt-2 text-[11px] uppercase tracking-[.2em] text-paper/60">Lattes</figcaption>
+                  </figure>
+                  <figure className="tilt relative overflow-hidden">
+                    <Image src="/images/r-pistachio.webp" alt="Latte topped with crushed pistachio" width={754} height={780} sizes="(min-width: 768px) 20vw, 45vw" className="w-full" />
+                    <figcaption className="mt-2 text-[11px] uppercase tracking-[.2em] text-paper/60">TODO: name this drink</figcaption>
+                  </figure>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* GIFT SHOP */}
-        <section id="shop" className="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
-          <div className="grid items-end gap-8 md:grid-cols-2">
-            <div className="reveal">
-              <p className="text-xs font-semibold uppercase tracking-[.3em] text-sage">Gift shop</p>
-              <h2 className="display mt-4 text-5xl md:text-7xl">Bring the <em>ritual</em> home.</h2>
-            </div>
-            <p className="reveal text-muted md:pb-3">
-              The shelves by the counter, online. Guests could browse and reserve gifts for pickup, so a visit can start before they walk in.
-            </p>
-          </div>
-          <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {["Product 1", "Product 2", "Product 3", "Product 4"].map((p, i) => (
-              <div key={p} className={`reveal tilt relative overflow-hidden rounded-2xl border border-[var(--line)] ${i % 2 ? "bg-lav-soft" : "bg-sage-soft"}`}>
-                <div className="flex aspect-square items-center justify-center p-6 text-center">
-                  <p className="pop display text-xl italic text-muted">TODO: photo of a real gift-shop item</p>
-                </div>
-                <div className="border-t border-[var(--line)] bg-paper px-4 py-3 text-sm"><span className="font-semibold">{p}</span> <span className="text-muted">· TODO price</span></div>
+        <section id="shop" className="limewash py-24 md:py-32">
+          <div className="mx-auto max-w-6xl px-5 md:px-8">
+            <div className="grid items-end gap-8 md:grid-cols-2">
+              <div className="reveal">
+                <p className="caps text-[11px] text-olive">Gift shop</p>
+                <h2 className="display mt-4 text-5xl md:text-7xl">Take a little <span className="accent text-wood">ritual</span> home.</h2>
               </div>
-            ))}
+              <p className="reveal text-muted md:pb-3">Woven baskets, stoneware, jars and cards. TODO: name the makers you carry, and add online orders for pickup.</p>
+            </div>
+            <div className="mt-12 grid gap-6 md:grid-cols-2">
+              <figure className="reveal tilt relative overflow-hidden"><Image src="/images/r-shelves.webp" alt="Gift-shop shelves with jars, cards and woven baskets on a driftwood stand" width={744} height={922} sizes="(min-width: 768px) 50vw, 100vw" className="w-full" /></figure>
+              <figure className="reveal tilt relative overflow-hidden md:mt-20"><Image src="/images/r-shop.webp" alt="Wood tables of gifts, textiles and stoneware" width={752} height={926} sizes="(min-width: 768px) 50vw, 100vw" className="w-full" /></figure>
+            </div>
           </div>
         </section>
 
-        {/* KIDS + PHOTO */}
-        <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-24 md:grid-cols-2 md:px-8">
-          <div className="reveal relative overflow-hidden rounded-[2rem]">
-            <Image src="/images/paper.webp" alt="Latte on a saucer beside a sketchbook" width={1200} height={799} sizes="(min-width: 768px) 50vw, 100vw" className="w-full" />
+        {/* SISTER SHOP: House of Stickks & Stones */}
+        <section className="bg-paper py-24 md:py-32">
+          <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-[1.2fr_1fr] md:px-8">
+            <div className="reveal relative">
+              <Image src="/images/r-storefront.webp" alt="Daily Rituals and House of Stickks & Stones storefronts side by side at night" width={1375} height={340} sizes="(min-width: 768px) 55vw, 100vw" className="w-full" />
+            </div>
+            <div className="reveal">
+              <p className="caps text-[11px] text-olive">Next door</p>
+              <h2 className="display mt-4 text-5xl md:text-6xl">Through the doorway: <span className="accent text-wood">House of Stickks &amp; Stones.</span></h2>
+              <p className="mt-6 text-muted">Our sister shop shares a wall with the café, with an open doorway between the two. Grab your coffee and wander through.</p>
+              <p className="mt-4 text-xs text-muted">TODO: one line on what Stickks &amp; Stones carries, plus its link.</p>
+              <div className="mt-8 overflow-hidden">
+                <Image src="/images/r-boutique.webp" alt="Clothing racks and home goods in the shop" width={1155} height={874} sizes="(min-width: 768px) 40vw, 100vw" className="w-full" />
+              </div>
+            </div>
           </div>
-          <div className="reveal">
-            <h2 className="display text-5xl md:text-6xl">A kids corner, <em>so grown-ups can sip.</em></h2>
-            <p className="mt-5 text-muted">Little ones have their own space while you finish your coffee. TODO: describe what&apos;s in the kids corner.</p>
-          </div>
+        </section>
+
+        {/* KIDS */}
+        <section className="mx-auto max-w-4xl px-5 py-24 text-center md:py-28">
+          <Star className="reveal mx-auto h-8 w-8 text-wood" />
+          <h2 className="reveal display mt-6 text-4xl md:text-6xl">A kids area, <span className="accent text-wood">so grown-ups can sip.</span></h2>
+          <p className="reveal mx-auto mt-5 max-w-lg text-muted">A play corner by the front window, with a little kitchen and a low table. TODO: confirm what&apos;s there now.</p>
         </section>
 
         {/* VISIT */}
-        <section id="visit" className="bg-paper py-24 md:py-32">
+        <section id="visit" className="bg-ink py-24 text-paper md:py-32">
           <div className="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-2 md:px-8">
             <div className="reveal">
-              <p className="text-xs font-semibold uppercase tracking-[.3em] text-sage">Visit</p>
-              <h2 className="display mt-4 text-5xl md:text-7xl">On Central, <em>in Nob Hill.</em></h2>
-              <address className="mt-6 not-italic text-lg">{ADDRESS}</address>
+              <Wordmark className="text-sm text-sand" />
+              <h2 className="display mt-6 text-5xl md:text-7xl">On Central, <span className="accent text-sand">in Nob Hill.</span></h2>
+              <address className="mt-6 not-italic text-lg text-paper/85">{ADDRESS}</address>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={MAPS} target="_blank" rel="noopener noreferrer" className="btn btn-ink">Get directions</a>
-                <a href={TEL} className="btn btn-soft">Call {PHONE}</a>
+                <a href={MAPS} target="_blank" rel="noopener noreferrer" className="btn bg-paper text-ink">Get directions</a>
+                <a href={TEL} className="btn border border-paper/60">Call {PHONE}</a>
               </div>
             </div>
-            <div className="reveal arch bg-lav-soft px-8 pb-10 pt-20 text-center">
-              <h3 className="display text-4xl italic">Hours</h3>
-              <dl className="mt-6 space-y-4">
+            <div className="reveal arch border border-paper/20 px-8 pb-10 pt-20 text-center">
+              <h3 className="caps text-xs text-sand">Hours</h3>
+              <dl className="mt-6 space-y-5">
                 {hours.map(([d, h]) => (
-                  <div key={d}><dt className="text-xs uppercase tracking-widest text-muted">{d}</dt><dd className="display text-3xl">{h}</dd></div>
+                  <div key={d}><dt className="text-[11px] uppercase tracking-[.25em] text-paper/60">{d}</dt><dd className="display mt-1 text-3xl">{h}</dd></div>
                 ))}
               </dl>
-              <p className="mt-6 text-xs text-muted">From Google Maps, Nov 2026. TODO: confirm with the café.</p>
+              <p className="mt-6 text-xs text-paper/50">From Google Maps, Nov 2026. TODO: confirm with the café.</p>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="px-5 py-8 text-center text-xs text-muted">
-        Concept demo prepared for Daily Rituals. Not the official website. Photos are stock placeholders until we shoot the real café.
+      <footer className="bg-ink px-5 pb-8 text-center text-xs text-paper/50">
+        Concept demo prepared for Daily Rituals. Not the official website.
       </footer>
     </>
   );

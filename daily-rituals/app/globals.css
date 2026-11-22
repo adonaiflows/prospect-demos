@@ -50,13 +50,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--wood); outline-
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 1s ease, transform 1s cubic-bezier(.2,.7,.2,1); }
 .reveal.is-in { opacity: 1; transform: none; }
 
-.tilt { transition: transform .3s ease-out; transform-style: preserve-3d; will-change: transform; }
-.tilt .pop { transform: translateZ(30px); }
 
-.sway { animation: sway 9s ease-in-out infinite; transform-origin: 50% 0; }
-@keyframes sway { 0%,100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
-.spin { animation: spin 50s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
+import Stage from "@/components/Stage";
 import Star from "@/components/Star";
 import Lamp from "@/components/Lamp";
 
@@ -27,6 +28,7 @@ export default function Home() {
   return (
     <>
       <Reveal />
+      <Stage />
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">Skip to content</a>
 
       <header className="sticky top-0 z-30 border-b border-[var(--line)] bg-plaster/85 backdrop-blur-md">
@@ -43,7 +45,7 @@ export default function Home() {
       </header>
 
       <main id="main">
-        {/* HERO: limewash wall, hanging rattan lamps, 3D stoneware cup */}
+        {/* HERO: limewash wall, rattan lamps, a 3D stack of real photos that turns toward the cursor */}
         <section className="limewash relative isolate overflow-hidden">
           <Lamp className="pointer-events-none absolute -top-2 left-[6%] hidden w-20 md:block" />
           <Lamp className="pointer-events-none absolute -top-10 right-[4%] w-16 md:w-24" />
@@ -66,9 +68,21 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="relative mx-auto h-[430px] w-full max-w-[420px] md:h-[540px]">
-              <div className="arch absolute inset-x-4 bottom-0 top-0 overflow-hidden bg-sand">
-                <Image src="/images/r-lattes.webp" alt="Two lattes with leaf art in black stoneware cups" fill priority sizes="(min-width: 768px) 400px, 90vw" className="object-cover" />
+            <div className="scene relative mx-auto h-[440px] w-full max-w-[440px] md:h-[560px]">
+              <div data-stage="14" className="absolute inset-0">
+                <div data-z="0" className="arch lift absolute inset-x-10 bottom-0 top-0 overflow-hidden bg-sand">
+                  <Image src="/images/r-counter.webp" alt="The Daily Rituals counter under rattan pendant lights" fill priority sizes="(min-width: 768px) 360px, 80vw" className="object-cover" />
+                </div>
+                <div data-z="110" className="absolute -left-1 bottom-10 w-[44%]">
+                  <figure className="bob lift overflow-hidden border-[7px] border-paper">
+                    <Image src="/images/r-lattes.webp" alt="Two lattes with leaf art in black stoneware cups" width={734} height={619} sizes="200px" className="w-full" />
+                  </figure>
+                </div>
+                <div data-z="170" className="absolute -right-1 top-14 w-[36%]">
+                  <figure className="bob-2 lift overflow-hidden border-[7px] border-paper">
+                    <Image src="/images/r-pistachio.webp" alt="Latte topped with crushed pistachio" width={754} height={780} sizes="170px" className="w-full" />
+                  </figure>
+                </div>
               </div>
             </div>
           </div>
@@ -93,16 +107,17 @@ export default function Home() {
             <p className="reveal text-muted md:pb-3">Long wood tables, soft chairs and plants in the window. Come for a cup and stay for the afternoon.</p>
           </div>
 
-          <div className="relative mt-14 grid gap-6 md:h-[640px] md:grid-cols-12 md:gap-0">
-            <figure className="reveal relative overflow-hidden md:col-span-7 md:col-start-1 md:row-start-1 md:h-[560px]">
-              <Image src="/images/r-counter.webp" alt="The Daily Rituals counter under rattan pendant lights" width={736} height={884} sizes="(min-width: 768px) 58vw, 100vw" className="h-full w-full object-cover" />
+          <div className="scene mt-14"><div data-stage="7" className="relative grid gap-6 md:h-[640px] md:grid-cols-12 md:gap-0">
+            <figure data-z="0" className="reveal relative overflow-hidden md:col-span-7 md:col-start-1 md:row-start-1 md:h-[560px]">
+              <Image src="/images/r-lounge.webp" alt="Lounge chair and menu board inside the café" width={754} height={922} sizes="(min-width: 768px) 58vw, 100vw" className="h-full w-full object-cover" />
             </figure>
-            <figure className="reveal relative z-10 overflow-hidden border-[10px] border-plaster shadow-[0_40px_60px_-30px_rgba(29,27,24,.6)] md:col-span-5 md:col-start-7 md:row-start-1 md:mt-24 md:h-[440px]">
-              <Image src="/images/r-lounge.webp" alt="Lounge chair and menu board inside the café" width={754} height={922} sizes="(min-width: 768px) 40vw, 100vw" className="h-full w-full object-cover" />
+            <figure data-z="60" className="reveal lift relative z-10 overflow-hidden border-[10px] border-plaster md:col-span-5 md:col-start-7 md:row-start-1 md:mt-24 md:h-[440px]" data-depth="-0.08">
+              <Image src="/images/r-boutique.webp" alt="The open shop floor with clothing racks, home goods and lounge seating" width={1155} height={874} sizes="(min-width: 768px) 40vw, 100vw" className="h-full w-full object-cover" />
             </figure>
-            <figure className="reveal relative z-20 hidden w-56 overflow-hidden border-[8px] border-plaster shadow-xl md:absolute md:-bottom-10 md:right-0 md:block">
+            <figure data-z="130" className="reveal lift relative z-20 hidden w-56 overflow-hidden border-[8px] border-plaster md:absolute md:-bottom-6 md:left-[52%] md:block" data-depth="-0.18">
               <Image src="/images/r-table.webp" alt="Live-edge wood table with log benches" width={750} height={906} sizes="224px" className="w-full" />
             </figure>
+          </div>
           </div>
         </section>
 
@@ -110,7 +125,7 @@ export default function Home() {
         <section id="lavender" className="relative isolate overflow-hidden bg-ink text-paper">
           <div className="grid md:grid-cols-2">
             <div className="relative min-h-[360px] overflow-hidden md:min-h-[640px]">
-              <div className="absolute inset-0">
+              <div className="absolute inset-x-0 -bottom-[12%] -top-[12%]" data-depth="0.12">
                 <Image src="/images/r-lavender.webp" alt="Lavender latte with leaf art and dried lavender on a wooden table" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
               </div>
             </div>
@@ -120,12 +135,7 @@ export default function Home() {
                 <h2 className="reveal display mt-4 text-5xl md:text-7xl">The <span className="accent text-lav">lavender</span> latte.</h2>
                 <p className="reveal mt-6 max-w-md text-lg text-paper/80">Espresso, steamed milk and our house lavender syrup.</p>
                 <p className="reveal mt-4 text-xs text-paper/55">TODO: price, milk options and whether it comes iced.</p>
-                <div className="reveal mt-10 max-w-[260px]">
-                                    <figure className="relative overflow-hidden">
-                    <Image src="/images/r-pistachio.webp" alt="Latte topped with crushed pistachio" width={754} height={780} sizes="(min-width: 768px) 20vw, 45vw" className="w-full" />
-                    <figcaption className="mt-2 text-[11px] uppercase tracking-[.2em] text-paper/60">TODO: name this drink</figcaption>
-                  </figure>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -141,9 +151,11 @@ export default function Home() {
               </div>
               <p className="reveal text-muted md:pb-3">Woven baskets, stoneware, jars and cards. TODO: name the makers you carry, and add online orders for pickup.</p>
             </div>
-            <div className="mt-12 grid gap-6 md:grid-cols-2">
-              <figure className="reveal relative overflow-hidden"><Image src="/images/r-shelves.webp" alt="Gift-shop shelves with jars, cards and woven baskets on a driftwood stand" width={744} height={922} sizes="(min-width: 768px) 50vw, 100vw" className="w-full" /></figure>
-              <figure className="reveal relative overflow-hidden md:mt-20"><Image src="/images/r-shop.webp" alt="Wood tables of gifts, textiles and stoneware" width={752} height={926} sizes="(min-width: 768px) 50vw, 100vw" className="w-full" /></figure>
+            <div className="scene mt-12">
+              <div data-stage="8" className="grid gap-6 md:grid-cols-2">
+                <figure data-z="0" className="reveal rise3d lift relative self-start overflow-hidden"><Image src="/images/r-shelves.webp" alt="Gift-shop shelves with jars, cards and woven baskets on a driftwood stand" width={744} height={922} sizes="(min-width: 768px) 50vw, 100vw" className="w-full" /></figure>
+                <figure data-z="80" className="reveal rise3d lift relative self-start overflow-hidden md:-ml-16 md:mt-24" data-depth="-0.1"><Image src="/images/r-shop.webp" alt="Wood tables of gifts, textiles and stoneware" width={752} height={926} sizes="(min-width: 768px) 50vw, 100vw" className="w-full" /></figure>
+              </div>
             </div>
           </div>
         </section>
@@ -151,17 +163,16 @@ export default function Home() {
         {/* SISTER SHOP: House of Stickks & Stones */}
         <section className="bg-paper py-24 md:py-32">
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-[1.2fr_1fr] md:px-8">
-            <div className="reveal relative">
-              <Image src="/images/r-storefront.webp" alt="Daily Rituals and House of Stickks & Stones storefronts side by side at night" width={1360} height={875} sizes="(min-width: 768px) 55vw, 100vw" className="w-full" />
+            <div className="scene reveal rise3d relative"><div data-stage="9">
+              <Image data-z="0" src="/images/r-storefront.webp" alt="Daily Rituals and House of Stickks & Stones storefronts side by side at night" width={1360} height={875} sizes="(min-width: 768px) 55vw, 100vw" className="lift w-full" />
+              </div>
             </div>
             <div className="reveal">
               <p className="caps text-[11px] text-olive">Next door</p>
               <h2 className="display mt-4 text-5xl md:text-6xl">Through the doorway: <span className="accent text-wood">House of Stickks &amp; Stones.</span></h2>
               <p className="mt-6 text-muted">Our sister shop shares a wall with the café, with an open doorway between the two. Grab your coffee and wander through.</p>
               <p className="mt-4 text-xs text-muted">TODO: one line on what Stickks &amp; Stones carries, plus its link.</p>
-              <div className="mt-8 overflow-hidden">
-                <Image src="/images/r-boutique.webp" alt="Clothing racks and home goods in the shop" width={1155} height={874} sizes="(min-width: 768px) 40vw, 100vw" className="w-full" />
-              </div>
+              
             </div>
           </div>
         </section>

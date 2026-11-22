@@ -7,7 +7,7 @@ Every pick was checked on Google Maps (open, not closed) and by looking at the c
 | Folder | Business | City | Why |
 |---|---|---|---|
 | `duggans-coffee` | Duggan's Coffee | Albuquerque (UNM) | No website. 390+ Google reviews. 3D: falling coffee beans you push with the cursor. |
-| `daily-rituals` | Daily Rituals | Albuquerque (Nob Hill) | No website. New, 4.9 stars. Calm, photo-led design in the café's real colors (no 3D, by request). |
+| `daily-rituals` | Daily Rituals | Albuquerque (Nob Hill) | No website. New, 4.9 stars. Real photos in 3D layers that turn toward the cursor and float on scroll, in the café's real colors. |
 | `santa-cecilia` | Santa Cecilia | Albuquerque (Old Town) | No website or phone listed. 3D: coffee surface that ripples when touched. |
 | `banya-spa` | Massage & Banya Spa of Santa Fe | Santa Fe | Default WordPress site still showing pandemic notices. |
 | `x-tactics` | X-Tactics Training & Performance | Rio Rancho | Broken template site, no https. |

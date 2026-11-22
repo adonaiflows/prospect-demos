@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f6f1e8;
+  --paper: #fffaf2;
+  --ink: #2e2a25;
+  --muted: #6c645a;
+  --sage: #6f7f5f;
+  --sage-soft: #dfe5d4;
+  --lav: #8a76ad;
+  --lav-soft: #e9e2f3;
+  --line: rgba(46, 42, 37, 0.14);
+}
+
+@theme inline {
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --color-bg: var(--bg);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-sage: var(--sage);
+  --color-sage-soft: var(--sage-soft);
+  --color-lav: var(--lav);
+  --color-lav-soft: var(--lav-soft);
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-sans), system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.display { font-family: var(--font-display), Georgia, serif; font-weight: 500; letter-spacing: -0.015em; line-height: 0.95; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 50px; padding: 0 1.5rem; border-radius: 999px; font-weight: 600; transition: transform .25s ease, background-color .25s ease, color .25s ease; }
+.btn:hover { transform: translateY(-2px); }
+.btn-ink { background: var(--ink); color: var(--paper); }
+.btn-ink:hover { background: #4b4135; }
+.btn-soft { border: 1px solid var(--line); background: rgba(255,250,242,.7); backdrop-filter: blur(6px); }
+.btn-soft:hover { background: var(--paper); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--lav); outline-offset: 3px; }
+
+.arch { border-radius: 999px 999px 28px 28px; }
+
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 1s ease, transform 1s cubic-bezier(.2,.7,.2,1); }
+.reveal.is-in { opacity: 1; transform: none; }
+
+.tilt { transition: transform .3s ease-out; transform-style: preserve-3d; will-change: transform; }
+.tilt .pop { transform: translateZ(30px); }
+
+.blob { filter: blur(50px); animation: drift 18s ease-in-out infinite alternate; }
+@keyframes drift { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(40px,-30px) scale(1.15); } }
+.float { animation: float 7s ease-in-out infinite; }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-16px) rotate(2deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}

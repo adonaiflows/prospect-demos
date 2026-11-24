@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* Homebody: a living room in a cup. Oat cream walls, espresso-dark type, one deep matcha green.
+   Script for the wordmark (like their cup), a soft serif for headlines. No motion beyond the cursor tilt. */
+:root {
+  --bg: #f3eee4;
+  --bg-2: #e9e1d2;
+  --ink: #1e1a15;
+  --muted: #5b5247;
+  --matcha: #46632a;
+  --leaf: #9cbf55;
+  --butter: #efe3be;
+  --line: rgba(30, 26, 21, 0.14);
+  /* shared order-kit tokens */
+  --paper: #fbf8f2;
+  --sand: #e9e1d2;
+  --wood: #46632a;
+  --olive: #46632a;
+  --plaster: #ffffff;
+}
+
+@theme inline {
+  --font-display: var(--font-display);
+  --font-script: var(--font-script);
+  --font-sans: var(--font-sans);
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-matcha: var(--matcha);
+  --color-leaf: var(--leaf);
+  --color-butter: var(--butter);
+  --color-paper: var(--paper);
+  --color-sand: var(--sand);
+  --color-wood: var(--wood);
+  --color-olive: var(--olive);
+  --color-plaster: var(--plaster);
+}
+
+html { scroll-behavior: smooth; accent-color: var(--matcha); }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-sans), system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.display { font-family: var(--font-display), Georgia, serif; font-weight: 500; letter-spacing: -0.015em; line-height: 0.95; }
+.script { font-family: var(--font-script), cursive; font-weight: 400; letter-spacing: 0; line-height: 1; }
+.caps { text-transform: uppercase; letter-spacing: .22em; font-weight: 600; }
+.accent { color: var(--matcha); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 52px; padding: 0 1.6rem; border-radius: 999px; font-weight: 600; font-size: .95rem; letter-spacing: .01em; transition: background-color .2s ease, color .2s ease; }
+.btn-matcha { background: var(--matcha); color: #fff; }
+.btn-matcha:hover { background: var(--ink); }
+.btn-ink { background: var(--ink); color: var(--paper); }
+.btn-ink:hover { background: var(--matcha); }
+.btn-line { border: 1.5px solid var(--ink); color: var(--ink); }
+.btn-line:hover { background: var(--ink); color: var(--bg); }
+.btn-light { background: var(--paper); color: var(--ink); }
+.btn-light:hover { background: var(--butter); }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid var(--matcha); outline-offset: 3px; }
+
+/* cart drawer */
+.cart { color: var(--ink); }
+.cart .accent { color: var(--matcha); }
+
+/* 3D photo stages (components/Stage.tsx): fixed depth always, cursor tilt on desktop only */
+.scene { perspective: 1300px; perspective-origin: 50% 45%; }
+[data-stage], .flat3d { transform-style: preserve-3d; }
+.lift { box-shadow: 0 50px 70px -34px rgba(40, 30, 15, .55), 0 16px 28px -18px rgba(40, 30, 15, .35); }
+.frame { background: #fffdf8; padding: 10px; }
+.arch { border-radius: 999px 999px 18px 18px; }
+
+/* demo hero-style switcher */
+.hero-switch { background: var(--ink); color: var(--paper); }
+.hero-switch button[aria-pressed="true"] { background: var(--leaf); color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}

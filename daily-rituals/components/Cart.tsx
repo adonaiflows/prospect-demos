@@ -123,7 +123,7 @@ function CartDrawer() {
   return (
     <div className={`fixed inset-0 z-50 ${open ? "" : "pointer-events-none"}`} aria-hidden={!open} inert={!open}>
       <div className={`absolute inset-0 bg-ink/40 backdrop-blur-sm transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`} onClick={() => setOpenKind(null)} />
-      <aside role="dialog" aria-modal="true" aria-label={COPY[kind].cart} className={`cart absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-paper shadow-2xl transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] ${open ? "translate-x-0" : "translate-x-full"}`}>
+      <aside role="dialog" aria-modal="true" aria-label={COPY[kind].cart} className={`cart absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-paper transition-[transform,visibility] duration-500 ease-[cubic-bezier(.2,.8,.2,1)] ${open ? "translate-x-0 shadow-2xl" : "invisible translate-x-full"}`}>
         <Panel key={kind} kind={kind} open={open} />
       </aside>
     </div>

@@ -6,15 +6,19 @@ Every pick was checked on Google Maps (open, not closed) and by looking at the c
 
 | Folder | Business | City | Why |
 |---|---|---|---|
-| `duggans-coffee` | Duggan's Coffee | Albuquerque (UNM) | No website. 390+ Google reviews. 3D: falling coffee beans you push with the cursor. |
-| `daily-rituals` | Daily Rituals | Albuquerque (Nob Hill) | No website. New, 4.9 stars. Real photos in 3D layers that turn toward the cursor and float on scroll, in the café's real colors. |
-| `santa-cecilia` | Santa Cecilia | Albuquerque (Old Town) | No website or phone listed. 3D: coffee surface that ripples when touched. |
+| `duggans-coffee` | Duggan's Coffee | Albuquerque (UNM) | No website. 390+ Google reviews. Online ordering (`/order`), photo 3D layers, 3 hero styles to choose from. |
+| `daily-rituals` | Daily Rituals | Albuquerque (Nob Hill) | No website. New, 4.9 stars. Real photos in 3D layers, online ordering (`/order`) and a separate gift-shop bag (`/shop`), in the café's real colors. |
+| `santa-cecilia` | Santa Cecilia | Albuquerque (Old Town) | No website or phone listed. Online ordering (`/order`), photo 3D layers, 3 hero styles to choose from. |
 | `banya-spa` | Massage & Banya Spa of Santa Fe | Santa Fe | Default WordPress site still showing pandemic notices. |
 | `x-tactics` | X-Tactics Training & Performance | Rio Rancho | Broken template site, no https. |
 
 Facts come from public sources only; anything the owner must supply is marked `TODO`. The coffee demos use stock photos as placeholders.
 
-3D scenes load only after the visitor first moves, scrolls or taps, and never with reduced motion, so they don't slow the first paint. Lighthouse mobile: Performance 88 to 99, Accessibility 100, Best Practices 100. SEO shows about 60 only because the demos are deliberately `noindex`.
+All three coffee demos share the same order kit: menu, cart, pickup-time checkout (ASAP or 15-minute slots within opening hours, Albuquerque time) and a demo confirmation. Nothing is sent or charged; the live version would plug into the café's POS. Menus and prices are labeled samples.
+
+The coffee demos use real photos as 3D layers (no WebGL): layers sit at different depths and turn toward the cursor, or with scroll on phones. Duggan's and Santa Cecilia show a small "Hero style A · B · C" switcher so the owner can pick a hero; `?hero=b` opens a link on a given style. Remove the switcher before launch.
+
+Lighthouse mobile: Performance 88 to 99, Accessibility 100, Best Practices 100. SEO shows about 60 only because the demos are deliberately `noindex`.
 
 ## Deploy on Vercel
 For each folder: vercel.com/new, import this repo, set **Root Directory** to the folder name, deploy.

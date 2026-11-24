@@ -6,6 +6,7 @@ import { useEffect } from "react";
  * - [data-stage] is a 3D scene. Its children with data-z sit at different depths (translateZ),
  *   and the whole scene turns toward the cursor, so the photos separate like layers.
  *   On touch screens the scene turns with scroll instead.
+ * - data-rot adds a fixed rotation after the depth (e.g. "rotate(-6deg)").
  * - [data-depth] elements drift with scroll at their own speed (parallax float).
  * Everything eases with a spring-like lerp. Nothing runs with reduced motion.
  */
@@ -15,13 +16,20 @@ export default function Stage() {
     const fine = window.matchMedia("(pointer: fine)").matches;
 
     type S = { el: HTMLElement; tx: number; ty: number; x: number; y: number };
-    const stages: S[] = Array.from(document.querySelectorAll<HTMLElement>("[data-stage]")).map((el) => {
-      el.querySelectorAll<HTMLElement>("[data-z]").forEach((c) => {
-        c.style.transform = `translateZ(${c.dataset.z}px)`;
+    let stages: S[] = [];
+    let layers: { el: HTMLElement; cur: number }[] = [];
+    // (re)collect stages; called again when a page swaps content in (e.g. the hero-style switcher)
+    const scan = () => {
+      stages = Array.from(document.querySelectorAll<HTMLElement>("[data-stage]")).map((el) => {
+        el.querySelectorAll<HTMLElement>("[data-z]").forEach((c) => {
+          c.style.transform = `translateZ(${c.dataset.z}px)${c.dataset.rot ? ` ${c.dataset.rot}` : ""}`;
+        });
+        return { el, tx: 0, ty: 0, x: 0, y: 0 };
       });
-      return { el, tx: 0, ty: 0, x: 0, y: 0 };
-    });
-    const layers = Array.from(document.querySelectorAll<HTMLElement>("[data-depth]")).map((el) => ({ el, cur: 0 }));
+      layers = Array.from(document.querySelectorAll<HTMLElement>("[data-depth]")).map((el) => ({ el, cur: 0 }));
+    };
+    scan();
+    window.addEventListener("stage:scan", scan);
 
     const onMove = (e: PointerEvent) => {
       for (const s of stages) {
@@ -60,7 +68,7 @@ export default function Stage() {
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("pointermove", onMove); };
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("pointermove", onMove); window.removeEventListener("stage:scan", scan); };
   }, []);
   return null;
 }

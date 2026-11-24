@@ -8,7 +8,7 @@ function status() {
   const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Denver" }));
   const mins = now.getHours() * 60 + now.getMinutes();
   const open = OPEN_DAYS.has(now.getDay()) && mins >= 510 && mins < 900;
-  return open ? "Open now until 3 pm" : "Closed now · opens 8:30 am Thu–Mon";
+  return open ? "Open now until 3 pm" : "Closed now · open Thu–Mon";
 }
 
 export default function OpenNow() {

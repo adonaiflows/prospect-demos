@@ -1,4 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ADDRESS, MAPS, PHONE, TEL, hours } from "@/lib/site";
+import { Wordmark } from "@/components/Header";
 import Reveal from "@/components/Reveal";
 import Stage from "@/components/Stage";
 import Star from "@/components/Star";
@@ -6,43 +9,11 @@ import Lamp from "@/components/Lamp";
 
 // Facts: Google Maps listing (checked Nov 22, 2026) and Adonai (sister shop House of Stickks & Stones shares a wall and an open doorway).
 // Photos: supplied by Adonai from the café's public listings. TODO: get the owners' OK or swap in their own photos before launch.
-const PHONE = "(504) 377-1751";
-const TEL = "tel:+15043771751";
-const ADDRESS = "3409 Central Ave NE, Albuquerque, NM 87106";
-const MAPS = "https://www.google.com/maps/search/?api=1&query=Daily+Rituals+3409+Central+Ave+NE+Albuquerque";
-
-const hours = [
-  ["Sunday – Thursday", "8 am – 3 pm"],
-  ["Friday – Saturday", "8 am – 5 pm"],
-];
-
-function Wordmark({ className = "" }: { className?: string }) {
-  return (
-    <span className={`inline-flex items-center gap-[.5em] caps ${className}`}>
-      Daily <Star className="h-[1.3em] w-[1.3em]" /> Rituals
-    </span>
-  );
-}
-
 export default function Home() {
   return (
     <>
       <Reveal />
       <Stage />
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">Skip to content</a>
-
-      <header className="sticky top-0 z-30 border-b border-[var(--line)] bg-plaster/85 backdrop-blur-md">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8" aria-label="Main">
-          <a href="#" aria-label="Daily Rituals home"><Wordmark className="text-sm md:text-base" /></a>
-          <div className="hidden items-center gap-8 text-xs uppercase tracking-[.2em] md:flex">
-            <a href="#space" className="hover:text-wood">The space</a>
-            <a href="#lavender" className="hover:text-wood">Lavender latte</a>
-            <a href="#shop" className="hover:text-wood">Gift shop</a>
-            <a href="#visit" className="hover:text-wood">Visit</a>
-          </div>
-          <a href={MAPS} target="_blank" rel="noopener noreferrer" className="bg-ink px-4 py-2 text-xs uppercase tracking-[.2em] text-paper">Directions</a>
-        </nav>
-      </header>
 
       <main id="main">
         {/* HERO: limewash wall, rattan lamps, a 3D stack of real photos that turns toward the cursor */}
@@ -59,8 +30,8 @@ export default function Home() {
                 Coffee, house lavender lattes, a gift shop and a kids area on Central Ave. Women-owned and Latino-owned, with our sister shop House of Stickks &amp; Stones right through the doorway.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#visit" className="btn btn-ink">Plan your visit</a>
-                <a href="#lavender" className="btn btn-line">The lavender latte</a>
+                <Link href="/order" className="btn btn-ink">Order ahead</Link>
+                <Link href="/shop" className="btn btn-line">Shop the gift shop</Link>
               </div>
               <p className="mt-8 flex items-center gap-3 text-sm text-muted">
                 <span className="tracking-[.3em] text-wood" aria-hidden>★★★★★</span>
@@ -135,6 +106,7 @@ export default function Home() {
                 <h2 className="reveal display mt-4 text-5xl md:text-7xl">The <span className="accent text-lav">lavender</span> latte.</h2>
                 <p className="reveal mt-6 max-w-md text-lg text-paper/80">Espresso, steamed milk and our house lavender syrup.</p>
                 <p className="reveal mt-4 text-xs text-paper/55">TODO: price, milk options and whether it comes iced.</p>
+                <Link href="/order" className="reveal btn mt-8 bg-paper text-ink hover:bg-sand">Order one ahead</Link>
                 
               </div>
             </div>
@@ -149,7 +121,7 @@ export default function Home() {
                 <p className="caps text-[11px] text-olive">Gift shop</p>
                 <h2 className="display mt-4 text-5xl md:text-7xl">Take a little <span className="accent text-wood">ritual</span> home.</h2>
               </div>
-              <p className="reveal text-muted md:pb-3">Woven baskets, stoneware, jars and cards. TODO: name the makers you carry, and add online orders for pickup.</p>
+              <div className="reveal md:pb-3"><p className="text-muted">Woven baskets, speckled stoneware, apothecary bottles and cards. Now you can shop them online and pick them up any day we&apos;re open.</p><Link href="/shop" className="btn btn-ink mt-6">Shop online</Link></div>
             </div>
             <div className="scene mt-12">
               <div data-stage="8" className="grid gap-6 md:grid-cols-2">
@@ -192,7 +164,7 @@ export default function Home() {
               <h2 className="display mt-6 text-5xl md:text-7xl">On Central, <span className="accent text-sand">in Nob Hill.</span></h2>
               <address className="mt-6 not-italic text-lg text-paper/85">{ADDRESS}</address>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={MAPS} target="_blank" rel="noopener noreferrer" className="btn bg-paper text-ink">Get directions</a>
+                <Link href="/visit" className="btn bg-paper text-ink">Hours &amp; directions</Link>
                 <a href={TEL} className="btn border border-paper/60">Call {PHONE}</a>
               </div>
             </div>
@@ -209,9 +181,6 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="bg-ink px-5 pb-8 text-center text-xs text-paper/50">
-        Concept demo prepared for Daily Rituals. Not the official website.
-      </footer>
     </>
   );
 }
